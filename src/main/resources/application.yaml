@@ -14,3 +14,8 @@ spring:
     show-sql: true
   flyway:
     enabled: false          # see note below
+
+app:
+   jwt:
+     secret: jevnevmkejrbijnvlkerqlnvijnrmwmclnovbrviuhjq3kfpmekfckmnovjr3        # at least 32 characters
+     ttl-minutes: 60

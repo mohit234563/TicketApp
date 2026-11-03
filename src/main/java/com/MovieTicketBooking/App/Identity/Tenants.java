@@ -41,7 +41,7 @@ public class Tenants {
     private String gstin;
     @JdbcTypeCode(SqlTypes.CHAR)
     @Column(name="currency",nullable = false,length = 3)
-    private String currency;
+    private String currency="INR";
     @Column(nullable = false)
     private String timezone = "Asia/Kolkata";
 }

@@ -21,7 +21,7 @@ public class StaffUsers {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @Column(name="fullname",nullable = false)
+    @Column(name="full_name",nullable = false)
     private String fullname;
     @Column(name = "password_hash",nullable = false)
     private String passwordHash;

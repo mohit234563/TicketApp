@@ -9,4 +9,5 @@ import java.util.UUID;
 public interface StaffUserRepository extends JpaRepository<StaffUsers,UUID> {
     Optional<StaffUsers>findByTenantIdAndEmail(UUID tenantId,String email);
     List<StaffUsers> findByTenantId(UUID TenantId);
+    Optional<StaffUsers> findByTenant_SlugAndEmail(String slug, String email);
 }
