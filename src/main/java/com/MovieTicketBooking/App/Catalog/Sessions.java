@@ -2,39 +2,53 @@ package com.MovieTicketBooking.App.Catalog;
 
 import com.MovieTicketBooking.App.Identity.Tenants;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 @Entity
 @Table(name = "sessions")
+@Getter@Setter
+@NoArgsConstructor
 public class Sessions {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @ManyToOne(fetch=FetchType.LAZY,optional = false)
     @JoinColumn(name="tenant_id",nullable = false)
     private Tenants tenant;
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "offering_id",nullable = false)
     private Offerings offering;
-    @JoinColumn(name = "resource_id",nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @JoinColumn(name = "resource_id")
     private Resources resource;
     @Column(nullable = false)
     private Instant startsAt;
     @Column(nullable = false)
     private Instant endsAt;
     private Instant salesOpenAt;
-    private Instant salesEndAt;
+    @Column(name = "sales_close_at")
+    private Instant salesCloseAt;
     @Enumerated(EnumType.STRING)
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
-   private SessionStatus status;
+    private SessionStatus status;
     @Column(nullable = false,name = "is_seated")
     private boolean isSeated;
-    @Column(name = "cancellation_policy",columnDefinition = "jsonb")
-    private Map<String,Object> cancellationPolicy;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "cancellation_policy", columnDefinition = "jsonb", nullable = false)
+    private List<Map<String, Object>> cancellationPolicy = new ArrayList<>();
+    @CreationTimestamp
     @Column(name = "created_at",nullable = false,updatable = false)
     private Instant createdAt;
 }

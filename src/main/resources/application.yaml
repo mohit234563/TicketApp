@@ -3,8 +3,8 @@ spring:
     name: App
   datasource:
     url: jdbc:postgresql://localhost:5432/ticketapp
-    username:
-    password:
+    username: postgres
+    password: Post@mohit
   jpa:
     open-in-view: false
     hibernate:

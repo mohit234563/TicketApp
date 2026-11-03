@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface SessionSeatRepository extends JpaRepository<SessionSeats,SessionSeatId> {
-    @Query("select s from SessionSeats where s.id.sessionId=:sessionId")
-    List<SessionSeats> findBySession(@Param("sessionId")UUID sessionId);
+    @Query("select s from SessionSeats s where s.id.sessionId = :sessionId")
+    List<SessionSeats> findBySession(@Param("sessionId") UUID sessionId);
 
     @Modifying
     @Query(nativeQuery = true,value = """

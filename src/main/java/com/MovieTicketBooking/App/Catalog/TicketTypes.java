@@ -14,6 +14,7 @@ public class TicketTypes {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "session_id",nullable = false)
     private Sessions session;
     @Column(nullable = false)
