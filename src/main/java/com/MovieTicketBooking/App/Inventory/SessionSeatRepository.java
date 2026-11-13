@@ -16,20 +16,20 @@ public interface SessionSeatRepository extends JpaRepository<SessionSeats,Sessio
     List<SessionSeats> findBySession(@Param("sessionId") UUID sessionId);
 
     @Modifying
-    @Query(nativeQuery = true,value = """
-        Insert into session_seats(session_id,seat_id,ticket_type_id,price)
-        select distinct on (s.id) se.id,s.id,tt.id,COALESCE(tt.base_pricer,0)
-        from sessions se
-            join resources r on r.id = se.resource_id
-            join seats s on s.layout_id=r.layout_id
-            left join ticket_types_tt
-                on tt.session_id=se.id
-                and (tt.section=s.section or tt.section is null)
-            where se.id =:sessionId
-            order by s.id,(tt.session is null)
-        on conflict do nothing
-""")
-    int generateForSession(@Param("sessionId")UUID sessionId);
+    @Query(nativeQuery = true, value = """
+    INSERT INTO session_seats (session_id, seat_id, ticket_type_id, price)
+    SELECT DISTINCT ON (s.id) se.id, s.id, tt.id, COALESCE(tt.base_price, 0)
+      FROM sessions se
+      JOIN resources r ON r.id = se.resource_id
+      JOIN seats s     ON s.layout_id = r.layout_id
+      LEFT JOIN ticket_types tt
+             ON tt.session_id = se.id
+            AND (tt.section = s.section OR tt.section IS NULL)
+     WHERE se.id = :sessionId
+     ORDER BY s.id, (tt.section IS NULL)
+    ON CONFLICT DO NOTHING
+    """)
+    int generateForSession(@Param("sessionId") UUID sessionId);
 
     @Modifying
     @Query(nativeQuery = true,value = """
