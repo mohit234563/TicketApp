@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -28,6 +29,6 @@ public class Seats {
     @Column(name = "col_no")
     private int colNo;
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(columnDefinition = "jsonb")
-    private Map<String,Object> attributes;
+    @Column(columnDefinition = "jsonb", nullable = false)
+    private Map<String, Object> attributes = new HashMap<>();
 }

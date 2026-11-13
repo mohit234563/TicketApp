@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@Table(name="venues",uniqueConstraints = @UniqueConstraint(columnNames = {"tenant_id","city"}))
+@Table(name = "venues")
 @Getter@Setter@NoArgsConstructor
 public class Venues {
     @Id

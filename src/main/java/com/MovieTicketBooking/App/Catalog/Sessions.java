@@ -30,21 +30,23 @@ public class Sessions {
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "offering_id",nullable = false)
     private Offerings offering;
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resource_id")
     private Resources resource;
-    @Column(nullable = false)
+    @Column(name = "starts_at", nullable = false)
     private Instant startsAt;
-    @Column(nullable = false)
+    @Column(name = "ends_at", nullable = false)
     private Instant endsAt;
+    @Column(name = "sales_open_at")
     private Instant salesOpenAt;
     @Column(name = "sales_close_at")
     private Instant salesCloseAt;
     @Enumerated(EnumType.STRING)
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
-    private SessionStatus status;
-    @Column(nullable = false,name = "is_seated")
-    private boolean isSeated;
+    @Column(nullable = false, columnDefinition = "session_status")
+    private SessionStatus status = SessionStatus.draft;
+    @Column(name = "is_seated", nullable = false)
+    private boolean isSeated = true;
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "cancellation_policy", columnDefinition = "jsonb", nullable = false)
     private List<Map<String, Object>> cancellationPolicy = new ArrayList<>();
@@ -52,24 +54,11 @@ public class Sessions {
     @Column(name = "created_at",nullable = false,updatable = false)
     private Instant createdAt;
 }
-//
-//CREATE TABLE sessions (
-//        id               UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-//tenant_id        UUID NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
-//offering_id      UUID NOT NULL REFERENCES offerings(id) ON DELETE CASCADE,
-//resource_id      UUID REFERENCES resources(id),
-//starts_at        TIMESTAMPTZ NOT NULL,
-//ends_at          TIMESTAMPTZ NOT NULL,
-//sales_open_at    TIMESTAMPTZ,
-//sales_close_at   TIMESTAMPTZ,
-//status           session_status NOT NULL DEFAULT 'draft',
-//is_seated        BOOLEAN NOT NULL DEFAULT true,    -- false = general admission
-//cancellation_policy JSONB NOT NULL DEFAULT '[]',   -- [{"hours_before":24,"refund_pct":90},...]
-//created_at       TIMESTAMPTZ NOT NULL DEFAULT now(),
-//CHECK (ends_at > starts_at),
-//    -- a resource can't be double-booked in overlapping time ranges
-//EXCLUDE USING gist (
-//        resource_id WITH =,
-//        tstzrange(starts_at, ends_at) WITH &&
-//        ) WHERE (resource_id IS NOT NULL AND status <> 'cancelled')
-//);
+
+
+
+
+
+
+
+

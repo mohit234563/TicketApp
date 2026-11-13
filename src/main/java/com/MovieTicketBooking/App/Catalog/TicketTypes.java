@@ -24,7 +24,7 @@ public class TicketTypes {
     private long basePrice;
     @Column(nullable = false,name = "tax_bps")
     private int taxBPS;
-    private int capacity;
+    private Integer capacity;
     @Column(name = "sold_count",nullable = false)
     private int soldCount=0;
     @Column(name = "held_count",nullable = false)

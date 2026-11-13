@@ -1,13 +1,13 @@
 package com.MovieTicketBooking.App.Catalog;
 
-import ch.qos.logback.core.Layout;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface LayoutRepository extends JpaRepository<Layout, UUID> {
+public interface LayoutRepository extends JpaRepository<Layouts, UUID> {
 
-    Optional<Layout> findByIdAndTenantId(UUID id,UUID tenantId);
-    Optional<Layout>findByTenantId(UUID tenantId);
+    Optional<Layouts> findByIdAndTenantId(UUID id,UUID tenantId);
+    List<Layouts> findByTenantId(UUID tenantId);
 }

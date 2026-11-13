@@ -10,6 +10,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -34,10 +35,10 @@ public class Offerings {
     @Column(name = "poster_url")
     private String posterUrl;
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(columnDefinition = "jsonb")
-    private Map<String,Object> attributes;
-    @Column(name = "is_active")
-    private boolean isActive;
+    @Column(columnDefinition = "jsonb", nullable = false)
+    private Map<String, Object> attributes = new HashMap<>();
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive = true;
     @CreationTimestamp
     @Column(name = "created_at",nullable = false,updatable = false)
     private Instant createdAt;

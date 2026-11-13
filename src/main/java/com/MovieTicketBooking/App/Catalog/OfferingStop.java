@@ -25,8 +25,8 @@ public class OfferingStop {
     private String city;
     @Column(nullable = false)
     private int seq;
-    @Column(nullable = false,name = "minutes_from_strat")
-    private int minutesFromStart=0;
+    @Column(nullable = false, name = "minutes_from_start")
+    private int minutesFromStart = 0;
     @Column(nullable = false,name = "is_boarding")
     private boolean isBoarding=true;
     @Column(nullable = false,name = "is_dropping")
