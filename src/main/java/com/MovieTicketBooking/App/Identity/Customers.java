@@ -18,11 +18,12 @@ public class Customers {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @Column(nullable = false,name = "full_name")
+    @Column(name = "full_name")
     private String fullname;
-    @Column(nullable = false,name = "password_hash")
+
+    @Column(name = "password_hash")
     private String passwordHash;
-    @Column(nullable = false,unique = true,columnDefinition = "citext")
+    @Column(unique = true, columnDefinition = "citext")
     private String email;
     @Column(unique = true)
     private String phone;
@@ -33,3 +34,6 @@ public class Customers {
     private Instant createdAt;
 
 }
+
+
+

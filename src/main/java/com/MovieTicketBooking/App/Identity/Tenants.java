@@ -25,7 +25,7 @@ public class Tenants {
     private String name;
     @Column(nullable = false,unique = true,name = "contact_email",columnDefinition="citext")
     private String email;
-    @Column(nullable = false,name="contact_phone")
+    @Column(name = "contact_phone")
     private String phone;
     @CreationTimestamp
     @Column(nullable = false,name="created_at",updatable = false)

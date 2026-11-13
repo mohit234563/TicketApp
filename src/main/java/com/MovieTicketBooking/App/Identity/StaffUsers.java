@@ -34,8 +34,8 @@ public class StaffUsers {
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(columnDefinition="staff_role",nullable = false)
     private StaffRole role;
-    @Column(name = "is_active",nullable = false)
-    private boolean isActive;
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive = true;
     @CreationTimestamp
     @Column(name = "created_at",nullable = false,updatable = false)
     private Instant createdAt;
