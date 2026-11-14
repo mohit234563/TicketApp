@@ -7,5 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface SessionRepository extends JpaRepository<Sessions, UUID> {
+    Optional<Sessions>findByIdAndTenantId(UUID id ,UUID tenantId);
     List<Sessions> findByTenantId(UUID tenantId);
+    boolean existsByResource_layout_id(UUID id);
 }

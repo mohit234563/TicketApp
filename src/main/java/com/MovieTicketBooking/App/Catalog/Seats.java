@@ -25,10 +25,14 @@ public class Seats {
     @JoinColumn(name = "layout_id",nullable = false)
     private Layouts layout;
     @Column(name = "row_no")
-    private int rowNo;
+    private Integer rowNo;
     @Column(name = "col_no")
-    private int colNo;
+    private Integer colNo;
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "jsonb", nullable = false)
     private Map<String, Object> attributes = new HashMap<>();
+
+    public Object getRol() {
+        return null;
+    }
 }
