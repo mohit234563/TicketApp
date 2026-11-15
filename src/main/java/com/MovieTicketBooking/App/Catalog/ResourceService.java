@@ -37,14 +37,14 @@ public class ResourceService {
         return ResourceResponse.from(find(id));
     }
     @Transactional
-    public ResourceResponse create(ResourseRequest req){
+    public ResourceResponse create(ResourceRequest req){
         Resources r=new Resources();
         r.setTenant(tenantRepo.getReferenceById(currentTenant.id()));
         apply(r,req);
         return ResourceResponse.from(repo.save(r));
     }
     @Transactional
-    public ResourceResponse update(UUID id,ResourseRequest req){
+    public ResourceResponse update(UUID id,ResourceRequest req){
         Resources r=find(id);
         UUID oldLayoutId=r.getLayout()==null?null:r.getLayout().getId();
         if(!Objects.equals(oldLayoutId,req.layoutId()) && sessionRepo.existsByResource_id(id)){
@@ -64,7 +64,7 @@ public class ResourceService {
         return repo.findByIdAndTenantId(id,currentTenant.id())
                 .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Resource not found"));
     }
-    private void apply(Resources r,ResourseRequest req){
+    private void apply(Resources r,ResourceRequest req){
         UUID tenantId=currentTenant.id();
         Layouts l=req.layoutId()==null?null
                 :layoutRepo.findByIdAndTenantId(req.layoutId(),tenantId)

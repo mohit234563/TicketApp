@@ -22,11 +22,11 @@ public class ResourceController {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResourceResponse create(@RequestBody ResourseRequest req){
+    public ResourceResponse create(@RequestBody ResourceRequest req){
         return service.create(req);
     }
     @PutMapping("/{id}")
-    public ResourceResponse update(@PathVariable UUID id,@RequestBody ResourseRequest req){
+    public ResourceResponse update(@PathVariable UUID id,@RequestBody ResourceRequest req){
         return service.update(id,req);
     }
     @DeleteMapping("/{id}")

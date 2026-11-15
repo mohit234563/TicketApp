@@ -7,7 +7,7 @@ import java.util.*;
 @Component
 public final class ResponseDtos {
     private ResponseDtos(){}
-    public record ResourseRequest(@NotBlank  String name, UUID venueId, UUID layoutId,Integer capacity,Map<String,Object>attributes){}
+    public record ResourceRequest(@NotBlank  String name, UUID venueId, UUID layoutId,Integer capacity,Map<String,Object>attributes){}
     public record ResourceResponse(UUID id,String name,UUID venueId,UUID layoutId,Integer capacity,Map<String,Object>attributes){
         static ResourceResponse from(Resources r){
             return new ResourceResponse(r.getId(),r.getName(),
