@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface OfferingRepository extends JpaRepository<Offerings,UUID> {
     List<Offerings>findByTenantId(UUID id);
+    Optional<Offerings>findByIdAndTenantId(UUID id,UUID tenantId);
 }

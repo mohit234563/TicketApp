@@ -9,5 +9,8 @@ import java.util.UUID;
 public interface SessionRepository extends JpaRepository<Sessions, UUID> {
     Optional<Sessions>findByIdAndTenantId(UUID id ,UUID tenantId);
     List<Sessions> findByTenantId(UUID tenantId);
-    boolean existsByResource_layout_id(UUID id);
+    List<Sessions>findByTenantIdAndOrderByStartAtDesc(UUID id);
+    List<Sessions>findByTenantIdAndOfferingIdOrderByStartAtDesc(UUID tenantId,UUID offeringId);
+    boolean existsByResource_layout_id(UUID layoutId);
+    boolean existsByResource_id(UUID resourceId);
 }
